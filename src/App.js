@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
+import {Cards,Chart,CountryPicker}from './Components'
+import styles from './App.module.css'
+import {fetchData}from './Api'
+class App extends React.Component{
+  state={
+    data:{}
+  }
+  async componentDidMount(){
+    const data=await fetchData()
+    this.setState={data}
+  }
+
+
+render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <Cards />
+      <Chart/>
+      <CountryPicker/>
+    
     </div>
   );
 }
-
+}
 export default App;
+
